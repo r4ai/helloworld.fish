@@ -1,0 +1,24 @@
+name: test
+run-name: test
+on: [push]
+jobs:
+  run-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install fish shell
+        run: |
+          sudo apt-add-repository --yes --no-update ppa:fish-shell/release-3
+          sudo apt-get update -qq
+          sudo apt-get install --yes fish
+        shell: bash
+      - name: Install fisher and install `helloworld` plugin
+        run: |
+          curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+          fisher install ./
+        shell: fish {0}
+      - name: Run tests
+        run: |
+          chmod +x ./test/helloworld.fish
+          ./test/helloworld.fish
+        shell: fish {0}
