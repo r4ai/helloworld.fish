@@ -11,3 +11,11 @@ function assert
         echo "SUCCESS: expected '$expected', got '$actual'"
     end
 end
+
+echo "=== START TESTS ==="
+
+set expected "Hello, World!"
+set actual (helloworld)
+assert "$expected" "$actual"
+
+echo "===  END TESTS  ==="
