@@ -14,8 +14,17 @@ end
 
 echo "=== START TESTS ==="
 
+# * test no args
 set expected "Hello, World!"
 set actual (helloworld)
+assert "$expected" "$actual"
+
+# * test -h,--help
+set expected "Usage: helloworld\n\nOptions:\n  -h, --help  Show this help message and exit"
+set actual (helloworld --help | string join "\n")
+assert "$expected" "$actual"
+
+set actual (helloworld -h | string join "\n")
 assert "$expected" "$actual"
 
 echo "===  END TESTS  ==="
